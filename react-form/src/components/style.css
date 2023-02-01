@@ -1,0 +1,14 @@
+form {}
+
+input {
+    padding: .5rem 1rem;
+    display: block;
+    margin-bottom: .3rem;
+}
+
+.btn {
+    background-color: green;
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+}
