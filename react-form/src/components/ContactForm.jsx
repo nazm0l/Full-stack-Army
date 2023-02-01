@@ -3,27 +3,51 @@ import { useState } from "react";
 import "./style.css";
 
 const ContactForm = () => {
-  const [value, setValue] = useState("");
+  const [formValue, setFormValue] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(event.target.name.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formValue);
+  };
+
+  const handleChange = (event) => {
+    setFormValue({
+      ...formValue,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div>
-          <input type="text" name="name" placeholder="Enter Your Name" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter Your Name"
+            value={formValue.name}
+            onChange={handleChange}
+          />
         </div>
         <div>
-          <input type="email" name="email" placeholder="Enter Your Email" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Your Email"
+            value={formValue.email}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <input
             type="password"
             name="password"
             placeholder="Enter Your Password"
+            onChange={handleChange}
           />
         </div>
         <input type="submit" value="Submit" className="btn" />
