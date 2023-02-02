@@ -22,12 +22,28 @@ const mapObjectToArray = (obj) => {
   return Object.keys(obj).map((key) => ({ name: key, ...formFields[key] }));
 };
 
-console.log(mapObjectToArray(formFields));
-
 const DynamicForm = () => {
+  const formData = mapObjectToArray(formFields);
+
   return (
     <div>
-      <h2>Dynamic Forms</h2>
+      <h2 className="font">Dynamic Forms</h2>
+      <form>
+        {formData.map((form, index) => (
+          <div key={index}>
+            <label className="font">{form.label}</label>
+            <input
+              type={form.type}
+              name={form.name}
+              placeholder={form.placeholder}
+              // value={formValue.name}
+            />
+          </div>
+        ))}
+        <div>
+          <input type="submit" value="Submit" className="btn" />
+        </div>
+      </form>
     </div>
   );
 };
