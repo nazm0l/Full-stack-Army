@@ -47,7 +47,6 @@ const DynamicForm = () => {
     console.log(formState);
     const values = Object.keys(formState).reduce((acc, cur) => {
       acc[cur] = formState[cur].value;
-
       return acc;
     });
     console.log(values);
