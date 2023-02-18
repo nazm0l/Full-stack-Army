@@ -34,14 +34,29 @@ const App = () => {
   );
 
   const handleInc = (id) => {
-    const newProducts = products.map((product) => {
-      if (id == product.id) {
-        product.quantity++;
-        product.total = product.quantity * product.price;
-      }
-      return product;
-    });
-    setProducts(newProducts);
+    setProducts(
+      products.map((product) => {
+        if (id == product.id && product.stock > product.quantity) {
+          product.quantity++;
+          product.total = product.quantity * product.price;
+        }
+        return product;
+      })
+    );
+  };
+
+  const total = products.reduce((acc, cur) => acc + cur.total, 0);
+
+  const handleDec = (id) => {
+    setProducts(
+      products.map((product) => {
+        if (id == product.id && product.quantity > 0) {
+          product.quantity--;
+          product.total = product.quantity * product.price;
+        }
+        return product;
+      })
+    );
   };
 
   return (
@@ -57,10 +72,16 @@ const App = () => {
           <th>Total</th>
           <tbody>
             {products.map((product) => (
-              <Counter key={product.id} {...product} handleInc={handleInc} />
+              <Counter
+                key={product.id}
+                {...product}
+                handleInc={handleInc}
+                handleDec={handleDec}
+              />
             ))}
           </tbody>
         </table>
+        {total > 0 && <p>Total Price: {total}</p>}
       </div>
     </div>
   );

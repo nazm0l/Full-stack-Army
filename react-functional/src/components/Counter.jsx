@@ -8,6 +8,7 @@ const Counter = ({
   quantity,
   total,
   handleInc,
+  handleDec,
 }) => {
   return (
     <tr>
@@ -18,8 +19,12 @@ const Counter = ({
       <td>{quantity}</td>
       <td>{total}</td>
       <td>
-        <button onClick={() => handleInc(id)}>+</button>
-        <button>-</button>
+        <button disabled={quantity == stock} onClick={() => handleInc(id)}>
+          +
+        </button>
+        <button disabled={quantity == 0} onClick={() => handleDec(id)}>
+          -
+        </button>
       </td>
     </tr>
   );
